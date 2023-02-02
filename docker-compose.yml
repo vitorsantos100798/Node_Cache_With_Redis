@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  redis-compose:
+    image: redis
+    command: redis-server --requirepass 6379 --appendonly yes
+    hostname: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - /home/duducp/Redis:/var/lib/postgresql/data
+
+version_Redis: '3.8'
+services_Redis:
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - cache:/data
+volumes:
+  cache:
+    driver: local
